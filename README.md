@@ -56,7 +56,20 @@ Car.objects.filter(year__gt=2016)> year grater than 2016
 User.object.get(username="matt")#return only one object
 ```
 
-17) Create a superuser on Terminal and register Lead, User, Agent in leads/admin.py
+17) Create a superuser(admin) on Terminal and register Lead, User, Agent in leads/admin.py
+
+18)  Fill djcrm/urls.py and leads/views.py to return a hellow world when some enters the home page.
+
+19) Update this http response to render function to return a html file.
+
+20) Add templates folder to . directory. Update DIRS key of TEMPLATES variable of djcrm/settings.py .
+
+21) Thanks to context argument of render function in views.py, we are able to send variables from view to template
+
+22) Always define app_name variable in project/urls.py
+
+
+
 
 
 
