@@ -54,6 +54,7 @@ Car.objects.all()
 Car.objects.filter(make="Audi")# outputing rows whose make column is Audi
 Car.objects.filter(year__gt=2016)> year grater than 2016
 User.object.get(username="matt")#return only one object
+Agent.objects.first()# returns first object
 ```
 
 17) Create a superuser(admin) on Terminal and register Lead, User, Agent in leads/admin.py
@@ -68,8 +69,18 @@ User.object.get(username="matt")#return only one object
 
 22) Always define app_name variable in project/urls.py
 
+23) Create lead_detail in leads/views.py and write relevant things in leads/urls.py.
 
+24) In leads/templates/leads/lead_create.html, 
 
+```html
+<form method="post" action=".">
+        {{form.as_p}}
+</form>
+```
 
+exist and it means send this form as paragraph to the existent url(. here)
+
+25) csrf_token should be included in forms in html. It is a middleware property for security.
 
 
