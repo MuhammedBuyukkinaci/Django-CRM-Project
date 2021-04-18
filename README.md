@@ -89,7 +89,7 @@ exist and it means send this form as paragraph to the existent url(. here)
 
 28) Create templates/base.html and templates/scripts.html. These are layout and partial view respectively.
 
-29) Go to [this link](https://github.com/aniftyco/awesome-tailwindcss) for awesome css templates.
+29) Go to Tailwind CSS [this link](https://github.com/aniftyco/awesome-tailwindcss) for awesome css templates.
 
 30) CDN is below. Don't use it in production. In production, use a minified version.
 
@@ -97,6 +97,50 @@ exist and it means send this form as paragraph to the existent url(. here)
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
 ```
+
+31) Create base.html, landing.html, navbar.html, scripts.html in templates folder. Update the contents in leads/templates/leads to have a better UI using Tailwind CSS.
+
+32) CRUD+L = Create, Retrieve, Update, Delete + List. These are actions that we perform while using models in leads/view.py.
+
+```python
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import UpdateView
+from django.views.generic import DeleteView
+from django.views.generic import ListView
+
+```
+
+33) The 2 codes make the same job. The first one is class-based view and the second one is function-based view.
+
+```python in leads/view.py
+class LeadListView(ListView):
+    template_name = "leads/lead_list.html"
+    #queryset is the objects sent to templates.
+    queryset = Lead.objects.all()
+    #If the name isn't specified, its name is object_list
+    context_object_name = "leads"
+```
+
+```python in leads/view.py
+def lead_list(request):
+    leads = Lead.objects.all()
+    context = {
+        "leads": leads
+    }
+    return render(request, "leads/lead_list.html",context)
+```
+
+34) Convert function based views to Class based view in leads/views.py
+
+35) Create lead_delete.html in leads/templates/leads()
+
+
+
+
+
+
+
 
 
 
