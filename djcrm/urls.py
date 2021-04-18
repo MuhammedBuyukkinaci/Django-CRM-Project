@@ -20,5 +20,7 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #namespace is used in templates links like
+    # href="{% url 'leads:lead-create' %}"
     path('leads/', include('leads.urls', namespace="leads") )
 ]

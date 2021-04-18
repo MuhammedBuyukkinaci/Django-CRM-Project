@@ -83,4 +83,14 @@ exist and it means send this form as paragraph to the existent url(. here)
 
 25) csrf_token should be included in forms in html. It is a middleware property for security.
 
+26) In leads/forms.py, It is important to add a comma after the last element of fields attribute of Meta class.
+
+27) To prevent hard coding like href="/leads/create/" in templates, use a pattern with name like `path('create/', lead_create, name = 'lead-create')` in leads/urls.py and use `href="{% url 'leads:lead-create' %}"` in templates while referencing. leads is namespace in djcrm/urls.py and lead-create is name in leads/urls.py
+
+
+
+
+
+
+
 
