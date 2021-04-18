@@ -87,6 +87,18 @@ exist and it means send this form as paragraph to the existent url(. here)
 
 27) To prevent hard coding like href="/leads/create/" in templates, use a pattern with name like `path('create/', lead_create, name = 'lead-create')` in leads/urls.py and use `href="{% url 'leads:lead-create' %}"` in templates while referencing. leads is namespace in djcrm/urls.py and lead-create is name in leads/urls.py
 
+28) Create templates/base.html and templates/scripts.html. These are layout and partial view respectively.
+
+29) Go to [this link](https://github.com/aniftyco/awesome-tailwindcss) for awesome css templates.
+
+30) CDN is below. Don't use it in production. In production, use a minified version.
+
+```html
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+```
+
+
 
 
 
