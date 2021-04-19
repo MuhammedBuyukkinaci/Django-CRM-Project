@@ -128,3 +128,8 @@ STATIC_ROOT =  "static_root"
 
 
 AUTH_USER_MODEL = 'leads.User'
+
+# If we were using SMTP, we need to configure SMTP credentials.
+#EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
+# To just print on console to run,
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

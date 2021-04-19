@@ -133,12 +133,13 @@ def lead_list(request):
 
 34) Convert function based views to Class based view in leads/views.py
 
-35) Create lead_delete.html in leads/templates/leads()
+35) Create lead_delete.html in leads/templates/leads folder.
 
 36) In production, all of my static files move to static file host provider like digital ocean spaces or amazon s3.
 
+37) Create static folder, create js and css folders in it. Update djcrm/urls.py and djcrm/settings.py and templates/base.html.
 
-
+38) Build up a system which sends email when a lead is created.
 
 
 
