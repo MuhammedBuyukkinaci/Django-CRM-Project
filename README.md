@@ -141,9 +141,9 @@ def lead_list(request):
 
 38) Build up a system which sends email when a lead is created.
 
+39) To enable login in the project, create templates/registration/login.html . Write relevant code in djcrm/urls.py. Write the line starting with LOGIN_REDIRECT_URL in djcrm/settings.py . Update navbar.html to show which user you are logged in. Make these operations for logout.
 
-
-
+40) Django doesn't provide authentication views for signup operation. For signup, create a class named SignupView in leads/views.py . Create signup.html under templates/registration. Then import leads.views.SignupView in djcrm/urls.py. Create a form named CustomUserCreationForm in leads/forms.py and use it in leads/views.py . 
 
 
 

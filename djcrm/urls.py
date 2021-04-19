@@ -21,6 +21,9 @@ from django.urls import include
 from leads.views import LandingPageView
 # from leads.views import home_page
 
+from django.contrib.auth.views import LoginView 
+from django.contrib.auth.views import LogoutView
+from leads.views import SignupView
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -30,6 +33,9 @@ urlpatterns = [
     # namespace is used in templates links like
     # href="{% url 'leads:lead-create' %}"
     path('leads/', include('leads.urls', namespace="leads") ),
+    path('signup/', SignupView.as_view(), name="signup" ),
+    path('login/', LoginView.as_view(), name="login" ),
+    path('logout/', LogoutView.as_view(), name="logout" ),
 ]
 
 if settings.DEBUG:

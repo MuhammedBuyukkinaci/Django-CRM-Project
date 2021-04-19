@@ -133,3 +133,5 @@ AUTH_USER_MODEL = 'leads.User'
 #EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
 # To just print on console to run,
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Which url to route after successful login
+LOGIN_REDIRECT_URL = "/leads"

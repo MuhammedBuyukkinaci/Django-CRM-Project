@@ -17,6 +17,18 @@ from django.views.generic import UpdateView
 from django.views.generic import DeleteView
 from django.views.generic import ListView
 
+from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
+
+class SignupView(CreateView):
+    template_name = "registration/signup.html"
+    #form_class = UserCreationForm
+    form_class = CustomUserCreationForm
+
+    def get_success_url(self):
+        return reverse("login")
+    
+
 
 class LandingPageView(TemplateView):
     template_name = "landing.html"
