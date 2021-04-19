@@ -135,6 +135,8 @@ def lead_list(request):
 
 35) Create lead_delete.html in leads/templates/leads()
 
+36) In production, all of my static files move to static file host provider like digital ocean spaces or amazon s3.
+
 
 
 
