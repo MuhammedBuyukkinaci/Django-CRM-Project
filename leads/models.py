@@ -4,6 +4,7 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
+from django.db.models.signals import post_save
 #User
 
 
@@ -12,6 +13,10 @@ class User(AbstractUser):
     #To add something like cellphone number:
     #cellphone = models.CharField(max_length=20)
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user.username
 # Create your models here.
 
 # Creating a Lead table
@@ -45,7 +50,14 @@ class Lead(models.Model):
 class Agent(models.Model):
     #Map 1 User to 1 Agent
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.user.email
 
+def post_user_created_signal(sender, instance, created,**kwargs):
+    print(instance,created)
+    if created:
+        UserProfile.objects.create(user=instance)
+
+post_save.connect(post_user_created_signal,sender = User)

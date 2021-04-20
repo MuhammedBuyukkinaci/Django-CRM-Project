@@ -20,6 +20,8 @@ from django.views.generic import ListView
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 class SignupView(CreateView):
     template_name = "registration/signup.html"
     #form_class = UserCreationForm
@@ -38,7 +40,7 @@ def landing_page(request):
     return render(request,"landing.html")
 
 
-class LeadListView(ListView):
+class LeadListView(LoginRequiredMixin,ListView):
     template_name = "leads/lead_list.html"
     #queryset is the objects sent to templates.
     queryset = Lead.objects.all()

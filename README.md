@@ -145,11 +145,27 @@ def lead_list(request):
 
 40) Django doesn't provide authentication views for signup operation. For signup, create a class named SignupView in leads/views.py . Create signup.html under templates/registration. Then import leads.views.SignupView in djcrm/urls.py. Create a form named CustomUserCreationForm in leads/forms.py and use it in leads/views.py . 
 
+41) Create leads/tests/ directory. Put an __init.py file there. Then, write your tests like test_views.py and test_forms.py . Each file includes different tests.
 
+42) Restrict the leads to be shown when you only log in. Leads should be shown only on their agents page.
 
+43) LoginRequiredMixin should be inherited first in leads/views.py like below. Add LoginRequiredMixin to LeadListView, LeadDetailView, LeadCreateView, LeadUpdateView, LeadDeleteView as a first inhertance parameter. This enables us to show Leads when only logged in.
 
+```python
+class LeadListView(LoginRequiredMixin,ListView):
+    template_name = "leads/lead_list.html"
+    #queryset is the objects sent to templates.
+    queryset = Lead.objects.all()
+    #If the name isn't specified, its name is object_list
+    context_object_name = "leads"
+```
 
+44) Add LOGIN_URL to djcrm/settings.py
 
+45) Update leads/models.py by adding a foreign key to Agent class and adding UserProfile class. Delete the database and makemigrations and migrate. Then, add UserProfile to admin.py
 
+46) Signals are basicly fired when certain events take place.
 
+47) In leads/models.py, we want to call post_user_created_signal function when we receive a post_save event.
 
+48) Signals are so powerful in Django.
