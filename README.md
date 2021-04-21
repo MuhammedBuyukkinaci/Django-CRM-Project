@@ -169,3 +169,9 @@ class LeadListView(LoginRequiredMixin,ListView):
 47) In leads/models.py, we want to call post_user_created_signal function when we receive a post_save event.
 
 48) Signals are so powerful in Django.
+
+49) Create a new app called agents and register the app in djcrm/settings.py. Create agents/urls.py. Update djcrm/urls.py . Create the contents of agents app in the way we did in leads app.
+
+50) Add agents to templates/navbar.html
+
+51) A user is either an agent or an organizer. Add is_organisor and is_agent fields to User class in leads/models.py . Then makemigrations and migrate.

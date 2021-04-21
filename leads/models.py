@@ -9,6 +9,9 @@ from django.db.models.signals import post_save
 
 
 class User(AbstractUser):
+    is_organisor = models.BooleanField(default=True)
+    is_agent = models.BooleanField(default=False)
+
     pass
     #To add something like cellphone number:
     #cellphone = models.CharField(max_length=20)
