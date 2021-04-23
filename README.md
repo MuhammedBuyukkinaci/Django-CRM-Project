@@ -174,4 +174,26 @@ class LeadListView(LoginRequiredMixin,ListView):
 
 50) Add agents to templates/navbar.html
 
-51) A user is either an agent or an organizer. Add is_organisor and is_agent fields to User class in leads/models.py . Then makemigrations and migrate.
+51) A user is either an agent or an organizer. Add is_organisor and is_agent fields to User class in leads/models.py . Then makemigrations and migrate. We don't want agents to see other agents in the navbar. To do this, update templates/navbar.html to show only leads. Organisors can only see leads and agents together.
+
+52) Create agents/mixins.py and fill its contents. Replace LoginRequiredMixin with OrganisorAndLoginRequiredMixin in agents/views.py
+
+53) Leads are going to load into the system and the organisor is going to assign it to agents. Agents are only able to see their leads and manage their leads. Therefore, agents aren't able to create a lead or delete a lead or update a lead. Agents can only see the list of their leads and the details. Replace LoginRequiredMixin with OrganisorAndLoginRequiredMixin for LeadCreateView, LeadUpdateView, LeadDeleteView in leads/views.py.
+
+54) Creating a lead is only possible for organisors, not for agents. Therefore, change leads/templates/leads/lead_list.html not to view "Create a new lead" for agents.
+
+55) Update agent attribute of Lead class in leads/models.py to have null values in case related agent is deleted etc.
+
+56) Add organisation attribute to Lead class in leads/models.py because agent may be null but ogranisation shouldn't be null. Then makemigrations with option 1 and migrate.
+
+57) Update get_queryset method of Classes in leads/views.py
+
+
+
+
+
+
+
+
+
+

@@ -22,6 +22,9 @@ from .forms import CustomUserCreationForm
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from agents.mixins import OrganisorAndLoginRequiredMixin
+
+
 class SignupView(CreateView):
     template_name = "registration/signup.html"
     #form_class = UserCreationForm
@@ -43,9 +46,22 @@ def landing_page(request):
 class LeadListView(LoginRequiredMixin,ListView):
     template_name = "leads/lead_list.html"
     #queryset is the objects sent to templates.
-    queryset = Lead.objects.all()
     #If the name isn't specified, its name is object_list
     context_object_name = "leads"
+    
+    # Initial queryset of leads for the entire organisation
+    def get_queryset(self):
+        # self.request.user is the logged-in users
+        user = self.request.user
+        if user.is_organisor:
+            #Thanks to OnetoOneFİeld, we write user.userprofile
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organisation=user.agent.organisation)
+            # filter for the agent that is logged in
+            queryset = queryset.filter(agent__user=user)
+        return queryset
+    
 
 def lead_list(request):
     #return HttpResponse("Hello world")
@@ -62,10 +78,22 @@ def lead_list(request):
     }
     return render(request, "leads/lead_list.html",context)
 
-class LeadDetailView(DetailView):
+class LeadDetailView(LoginRequiredMixin,DetailView):
     template_name = "leads/lead_detail.html"
-    queryset = Lead.objects.all()
     context_object_name = "lead"
+    
+    # Initial queryset of leads for the entire organisation
+    def get_queryset(self):
+        # self.request.user is the logged-in users
+        user = self.request.user
+        if user.is_organisor:
+            #Thanks to OnetoOneFİeld, we write user.userprofile
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = queryset.filter(organisation=user.agent.organisation)
+            # filter for the agent that is logged in
+            queryset = queryset.filter(agent__user=user)
+        return queryset
 
 
 def lead_detail(request,pk):
@@ -75,7 +103,7 @@ def lead_detail(request,pk):
     }
     return render(request, "leads/lead_detail.html", context)
 
-class LeadCreateView(CreateView):
+class LeadCreateView(OrganisorAndLoginRequiredMixin,CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForm
     def get_success_url(self):
@@ -109,10 +137,16 @@ def lead_create(request):
     }
     return render(request, "leads/lead_create.html", context)
 
-class LeadUpdateView(UpdateView):
+class LeadUpdateView(OrganisorAndLoginRequiredMixin,UpdateView):
     template_name = "leads/lead_update.html"
-    queryset = Lead.objects.all()
+    #queryset = Lead.objects.all()
     form_class = LeadModelForm
+    def get_queryset(self):
+        # self.request.user is the logged-in users
+        user = self.request.user
+        queryset = Lead.objects.filter(organisation=user.userprofile)
+        return queryset
+
     def get_success_url(self):
         return reverse("leads:lead-list")
 
@@ -131,10 +165,16 @@ def lead_update(request,pk):
 
     return render(request, "leads/lead_update.html", context)
 
-class LeadDeleteView(DeleteView):
+class LeadDeleteView(OrganisorAndLoginRequiredMixin,DeleteView):
     #DeleteView need a template_name
     template_name = "leads/lead_delete.html"
-    queryset = Lead.objects.all()
+    #queryset = Lead.objects.all()
+    def get_queryset(self):
+        user = self.request.user
+        queryset = Lead.objects.filter(organisation=user.userprofile)
+        return queryset
+
+
     def get_success_url(self):
         return reverse("leads:lead-list")
 

@@ -35,7 +35,9 @@ class Lead(models.Model):
     last_name = models.CharField(max_length= 20)
     age = models.IntegerField(default = 0)
     #models.CASCADE means deleting Lead in case Agent is deleted
-    agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    #agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
 
     # phoned = models.BooleanField(default=False)
     # source = models.CharField(choices = SOURCE_CHOICES,max_length=100)
