@@ -198,6 +198,32 @@ class LeadListView(LoginRequiredMixin,ListView):
 
 62) Creating CategoryListView in view in accordance with leads/models.py
 
+63) Creating CategoryDetailView
+
+64) Creating CategoryUpdateView
+
+65) [DjangoPackages](djangopackages.com) is a website that hosts many reuseable apps. You can check out their versions, github links, github starts etc to use them in your project.
+
+66) Install django-crispy-forms via the command below and add it to INSTALLED_APPS in djcrm/settings.py
+
+```shell
+pip install django-crispy-forms
+```
+
+67) Install crispy-tailwind via the command below and add it to djcrm/settings.py. Add "crispy_tailwind" to INSTALLED_APPS
+
+```shell
+pip install crispy-tailwind
+```
+
+```python
+#Add the following to djcrm/settings.py
+CROSPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = 'tailwind'
+```
+
+68) Add `{% load tailwind_filters %}` to 2nd line of templates/registration/login.html. Replace `{{ form|crispy }}` to `{{form.as_p}}`
+
 
 
 
