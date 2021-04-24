@@ -188,10 +188,15 @@ class LeadListView(LoginRequiredMixin,ListView):
 
 57) Update get_queryset method of Classes in leads/views.py
 
+58) Resetting password when someone signed up.
 
+59) Dividing leads into 2. Assigned leads to an agent and unassigned leads to an agent.
 
+60) Creating a Category class in leads/models.py. Category means one of new, contacted, converted, unconverted
 
+61) Creating leads/templates/leads/category_list.html and fill its content. It will show us the number of leads per each category.
 
+62) Creating CategoryListView in view in accordance with leads/models.py
 
 
 
