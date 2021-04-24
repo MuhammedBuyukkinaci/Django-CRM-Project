@@ -26,6 +26,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from agents.mixins import OrganisorAndLoginRequiredMixin
 from .models import Category
+from .forms import LeadCategoryUpdateForm
 
 class SignupView(CreateView):
     template_name = "registration/signup.html"
@@ -283,6 +284,28 @@ class CategoryDetailView(LoginRequiredMixin,DetailView):
                 organisation=user.agent.organisation
             )
         return queryset
+
+class LeadCategoryUpdateView(LoginRequiredMixin,UpdateView):
+    template_name = "leads/lead_category_update.html"
+    #queryset = Lead.objects.all()
+    form_class = LeadCategoryUpdateForm
+
+
+    def get_queryset(self):
+        # self.request.user is the logged-in users
+        user = self.request.user
+        if user.is_organisor:
+            #Thanks to OnetoOneFİeld, we write user.userprofile
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        else:
+            queryset = Lead.objects.filter(organisation=user.agent.organisation)
+            # filter for the agent that is logged in
+            queryset = queryset.filter(agent__user=user)
+        return queryset
+
+    def get_success_url(self):
+        return reverse("leads:lead-detail", kwargs={"pk":self.get_object().id})
+
 
 # Redundant functions
 # def lead_update(request,pk):
