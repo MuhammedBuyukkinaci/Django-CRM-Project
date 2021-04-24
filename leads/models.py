@@ -44,8 +44,9 @@ class Lead(models.Model):
     #agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
-
-    category = models.ForeignKey("Category",null=True, blank=True,on_delete=models.SET_NULL)
+    # related_name="leads" is used in get_context_data method of CategoryDetailView
+    category = models.ForeignKey("Category",related_name="leads",null=True, blank=True,on_delete=models.SET_NULL)
+    
     # phoned = models.BooleanField(default=False)
     # source = models.CharField(choices = SOURCE_CHOICES,max_length=100)
 
