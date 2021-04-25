@@ -224,7 +224,26 @@ CRISPY_TEMPLATE_PACK = 'tailwind'
 
 68) Add `{% load tailwind_filters %}` to 2nd line of templates/registration/login.html. Replace `{{ form|crispy }}` to `{{form.as_p}}`
 
+69) Add some CSS to have a better styling.
 
+70) Install [django-environ package](https://github.com/joke2k/django-environ) to manage ENV variablbles
 
+```
+pip install django-environ
+```
 
+71) Create djcrm/.env file and fill its content to be used in production. This file isn't added to git. A sample env file is below:
+
+```
+DEBUG=on
+SECRET_KEY=your-secret-key
+DATABASE_URL=psql://user:un-githubbedpassword@127.0.0.1:8458/database
+SQLITE_URL=sqlite:///my-local-sqlite.db
+CACHE_URL=memcache://127.0.0.1:11211,127.0.0.1:11212,127.0.0.1:11213
+REDIS_URL=rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=ungithubbed-secret
+```
+
+72) Create djcrm/.template.env file to be used in development
+
+73) In production, ENV variables are used in System ENV variables, not in djcrm/settings.py .Therefore, comment out the line starting with environ.Env.read_env() in djcrm/settings.py . Instead, define them via shell script like `export DEBUG=True` on Terminal
 
