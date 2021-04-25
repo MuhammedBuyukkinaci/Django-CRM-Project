@@ -11,6 +11,8 @@
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
             These are the leads under this category
         </p>
+        <a href="{% url 'leads:category-update' category.pk %}" class="hover:text-blue-500">Update</a>
+        <a href="{% url 'leads:category-delete' category.pk %}" class="hover:text-blue-500">Delete</a>
       </div>
       <div class="lg:w-2/3 w-full mx-auto overflow-auto">
         <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -28,7 +30,7 @@
             {% for lead in category.leads.all %}
                 <tr>
                     <td class="px-4 py-3">
-                    <a class="hover:text-blue-500" href = "{% url 'leads:lead-detail' lead.pk %}">{{ lead.first_name }}</a>
+                      <a class="hover:text-blue-500" href="{% url 'leads:lead-detail' lead.pk %}">{{ lead.first_name }}</a>
                     </td>
                     <td class="px-4 py-3">{{ lead.last_name }}</td>
                 </tr>
