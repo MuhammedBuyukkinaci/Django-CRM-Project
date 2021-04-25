@@ -243,7 +243,35 @@ CACHE_URL=memcache://127.0.0.1:11211,127.0.0.1:11212,127.0.0.1:11213
 REDIS_URL=rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=ungithubbed-secret
 ```
 
-72) Create djcrm/.template.env file to be used in development
+72) Run the command below on terminal to use djcrm/.env file and not to use it if you want to use djcrm/.template.env
 
-73) In production, ENV variables are used in System ENV variables, not in djcrm/settings.py .Therefore, comment out the line starting with environ.Env.read_env() in djcrm/settings.py . Instead, define them via shell script like `export DEBUG=True` on Terminal
+```
+export READ_DOT_ENV_FILE=True
+```
+
+73) Create djcrm/.template.env file to be used in development
+
+74) In production, ENV variables are used in System ENV variables, not in djcrm/settings.py .Therefore, comment out the line starting with environ.Env.read_env() in djcrm/settings.py . Instead, define them via shell script like `export DEBUG=True` on Terminal
+
+75) Create a DB, Create a User with password and grant access to that user on the DB.
+
+```shell
+# On terminal
+sudo su postgres
+psql
+
+# Database Operations
+# Craete DB
+CREATE DATABASE djcrm;
+# Create User
+CREATE USER djcrmuser WITH PASSWORD 'djcrm1234';
+# Grant the user
+GRANT ALL PRIVILEGES ON DATABASE djcrm TO djcrmuser;
+```
+
+76) Install Postgresql engine via
+
+```
+pip install psycopg2-binary
+```
 
