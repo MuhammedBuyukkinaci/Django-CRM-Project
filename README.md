@@ -275,3 +275,26 @@ GRANT ALL PRIVILEGES ON DATABASE djcrm TO djcrmuser;
 pip install psycopg2-binary
 ```
 
+77) [whitenoise](http://whitenoise.evans.io/en/stable/) is a python package to host static files in a python project. Install it via
+
+```
+pip install whitenoise
+```
+
+and add the following line to MIDDLEWARE list in djcrm/settings.py
+
+```
+MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+```
+
+and add STATICFILES_STORAGE variable to the same djcrm/settings.py
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+78) To put all static files in a folder in . directory,
+
+```
+python manage.py collectstatic
+```
+
