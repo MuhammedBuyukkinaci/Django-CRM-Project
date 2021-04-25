@@ -329,3 +329,5 @@ gunicorn djcrm.wsgi:application
 ```
 
 81) Create runserver.sh and make it executable.
+
+82) We need an SMTP e-mail sender. For example, mailgun or sendgrid. The Youtuber used mailgun.

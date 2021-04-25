@@ -176,6 +176,7 @@ LOGOUT_REDIRECT_URL = "/"
 CROSPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = 'tailwind'
 
+# For production
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
@@ -189,3 +190,11 @@ if not DEBUG:
     X_FRAME_OPTIONS = "DENY"
 
     ALLOWED_HOSTS = ["*"]
+
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "smtp.mailgun.org"
+    EMAIL_HOST_USER = "postmaster@mg.domain.com"
+    EMAIL_HOST_PASSWORD= "123456"
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    DEFAULT_FROM_EMAIL = "yourname@domain.com"
