@@ -260,7 +260,7 @@ export READ_DOT_ENV_FILE=True
 sudo su postgres
 psql
 
-# Database Operations
+# Database Operations on Terminal
 # Craete DB
 CREATE DATABASE djcrm;
 # Create User
@@ -298,3 +298,34 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 python manage.py collectstatic
 ```
 
+79) Add the following lines to djcrm/settings.py to get ready in production.
+
+```python
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = "DENY"
+
+    ALLOWED_HOSTS = ["*"]
+```
+
+80) Install gunicorn . It is a technology to run the server in production.
+
+```
+pip install gunicorn
+```
+
+81) To run the app via gunicorn
+
+```
+gunicorn djcrm.wsgi:application
+```
+
+81) Create runserver.sh and make it executable.
