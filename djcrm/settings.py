@@ -142,6 +142,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # Which url to route after successful login
 LOGIN_REDIRECT_URL = "/leads"
 LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/"
 
 # For crispy for and crispy-tailwind
 CROSPY_ALLOWED_TEMPLATE_PACKS = "tailwind"

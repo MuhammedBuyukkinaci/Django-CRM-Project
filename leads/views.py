@@ -129,6 +129,9 @@ class LeadCreateView(OrganisorAndLoginRequiredMixin,CreateView):
     
     def form_valid(self,form):
         # TODO send email
+        lead = form.save(commit = False)
+        lead.organisation = self.request.user.userprofile
+        lead.save()
         send_mail(
             subject="a lead has been created",
             message= "Go to the site to view the new lead",

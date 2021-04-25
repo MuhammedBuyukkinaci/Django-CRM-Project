@@ -46,7 +46,10 @@ class Lead(models.Model):
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     # related_name="leads" is used in get_context_data method of CategoryDetailView
     category = models.ForeignKey("Category",related_name="leads",null=True, blank=True,on_delete=models.SET_NULL)
-    
+    description = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+    phone_number = models.CharField(max_length=20)
+    email = models.EmailField()
     # phoned = models.BooleanField(default=False)
     # source = models.CharField(choices = SOURCE_CHOICES,max_length=100)
 
